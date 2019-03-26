@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+
+## define the font for dmenu to be used
+DMENU_FN="Noto-11"
+
+## background colour for unselected menu-items
+DMENU_NB="#080808"
+
+## text colour for unselected menu-items
+DMENU_NF="#F9FAF9"
+
+## background colour for selected menu-items
+DMENU_SB="#725f8f"
+
+## text colour for selected menu-items
+DMENU_SF="#F9FAF9"
+
+
+# Script to logout, shutdown, reboot, and lock screen if set
+LOGOUT="Logout"
+REBOOT="Reboot"
+SHUTDOWN="Shutdown"
+LOCK=""
+LOCK_COMMAND=""
+if [[ $LOCK && $LOCK_COMMAND ]] && hash $(awk 'print $1' <<< "$LOCK_COMMAND") >/dev/null 2>&1; then
+    CHOICE="$(printf "%s\n%s\n%s\n%s" "$LOCK" "$LOGOUT" "$REBOOT" "$SHUTDOWN" | dmenu -p "System" -fn "$DMENU_FN" -nb "$DMENU_NB" -nf "$DMENU_NF" -sb "$DMENU_SB" -sf "$DMENU_SF" "$@")"
+else
+    CHOICE="$(printf "%s\n%s\n%s" "$LOGOUT" "$REBOOT" "$SHUTDOWN" | dmenu -p "System" -fn "$DMENU_FN" -nb "$DMENU_NB" -nf "$DMENU_NF" -sb "$DMENU_SB" -sf "$DMENU_SF" "$@")"
+fi
+
+case "$CHOICE" in
+    "$LOGOUT") pkill -15 -t tty"$XDG_VTNR" Xorg ;;
+    "$REBOOT") reboot ;;
+    "$SHUTDOWN") poweroff ;;
+    "$LOCK") $LOCK_COMMAND ;;
+    *) exit 0
+esac
