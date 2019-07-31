@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+## define the font for dmenu to be used
+DMENU_FN="RobotoMono-14"
+## background colour for unselected menu-items
+DMENU_NB="#202020"
+## text colour for unselected menu-items
+DMENU_NF="#ddd"
+## background colour for selected menu-items
+DMENU_SB="#A30817"
+## text colour for selected menu-items
+DMENU_SF="#ddd"
+
+choices="laptop\nlaptopdualhdmi\nlaptopdualvga\nHDMI\nVGA\nManual selection"
+chosen=$(echo -e "$choices" | dmenu -i -fn "$DMENU_FN" -nb "$DMENU_NB" -nf "$DMENU_NF" -sb "$DMENU_SB" -sf "$DMENU_SF")
+
+case "$chosen" in
+	"laptop")
+		xrandr --output LVDS-1 --auto --output VGA-1 --off --output HDMI-1 --off ;;
+	"laptopdualhdmi")
+		xrandr --output LVDS-1 --auto --output HDMI-1 --rifht-of LVDS-1 ;;
+	"laptopdualvga")
+		xrandr --output LVDS-1 --auto --output VGA-1 --rifht-of LVDS-1 ;;
+	"HDMI")
+		xrandr --output HDMI-1 --auto --output LVDS-1 --off ;;
+	"VGA")
+		xrandr --output VGA-1 --auto --output LVDS-1 --off ;;
+	"Manual selection")
+		arandr ;;
+esac

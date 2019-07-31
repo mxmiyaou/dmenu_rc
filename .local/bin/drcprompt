@@ -6,19 +6,19 @@
 # './prompt "Do you want to shutdown?" "shutdonw -h now"'
 
 ## define the font for dmenu to be used
-DMENU_FN="Noto-11"
+DMENU_FN="Roboto-12"
 
 ## background colour for unselected menu-items
 DMENU_NB="#080808"
 
 ## text colour for unselected menu-items
-DMENU_NF="#F9FAF9"
+DMENU_NF="#FDFDFD"
 
 ## background colour for selected menu-items
-DMENU_SB="#725f8f"
+DMENU_SB="#7289da"
 
 ## text colour for selected menu-items
-DMENU_SF="#F9FAF9"
+DMENU_SF="#FDFDFD"
 
 [ $(echo -e "No\nYes" | dmenu -i -fn "$DMENU_FN" -nb "$DMENU_NB" -nf "$DMENU_NF" -sb "$DMENU_SB" -sf "$DMENU_SF" -p "$1") \
 == "Yes" ] && $2

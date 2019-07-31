@@ -1,18 +1,4 @@
 #!/usr/bin/env bash
 
-## define the font for dmenu to be used
-DMENU_FN="Noto-11"
-
-## background colour for unselected menu-items
-DMENU_NB="#080808"
-
-## text colour for unselected menu-items
-DMENU_NF="#F9FAF9"
-
-## background colour for selected menu-items
-DMENU_SB="#725f8f"
-
-## text colour for selected menu-items
-DMENU_SF="#F9FAF9"
-
+source $HOME/.config/dmenu/dmenurc
 dmenu -i -fn "$DMENU_FN" -nb "$DMENU_NB" -nf "$DMENU_NF" -sb "$DMENU_SB" -sf "$DMENU_SF"

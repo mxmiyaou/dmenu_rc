@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+source $HOME/.config/dmenu/dmenurc
+
+choice=$(dmenu -i -fn "$DMENU_FN" -nb "$DMENU_NB" -nf "$DMENU_NF" -sb "$DMENU_SB" -sf "$DMENU_SF" -p "pactl volume set: " <&- && echo) && sh -c "pactl set-sink-volume @DEFAULT_SINK@ $choice%; paplay /usr/share/sounds/freedesktop/stereo/audio-volume-change.oga"
